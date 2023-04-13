@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    const vNode = {
+      type: 'div',
+      props: {
+        id: 'app'
+      },
+      // children:'hello world'
+      children: [
+        {
+          type: 'p',
+          props: {
+            class: 'p1'
+          },
+          children: 'hello world1'
+        },
+        {
+          type: 'p',
+          props: {
+            class: 'p2'
+          },
+          children: 'hello world2'
+        }
+      ]
+    }
+    function render(vNode, container) {
+      const dom = document.createElement(vNode.type)
+      for (const key in vNode.props) {
+        const value = vNode.props[key]
+        dom.setAttribute(key, value)
+      }
+      if (typeof vNode.children === 'string') {
+        dom.textContent = vNode.children
+      } else {
+        vNode.children.forEach(child => {
+          render(child, dom)
+        })
+      }
+      container.appendChild(dom)
+    }
+    render(vNode, document.querySelector('#app'))
+  </script>
+</body>
+
+</html>

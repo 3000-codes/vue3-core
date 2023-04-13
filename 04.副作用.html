@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>副作用</title>
+</head>
+
+<body>
+  <p>
+    在执行setter或者getter时，主动或被动的造成的其他影响，就是副作用。
+  </p>
+</body>
+<script src="./vue.global.js"></script>
+<script>
+  const { reactive, effect } = Vue
+
+  const state = reactive({
+    count: 0
+  })
+
+  effect(() => {
+    console.log(state.count);
+  })
+  setInterval(() => {
+    state.count++
+  }, 1000)
+</script>
+
+</html>

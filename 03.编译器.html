@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03.编译器</title>
+</head>
+
+<body>
+  <div id="app"></div>
+</body>
+<script src="./vue.global.js"></script>
+<script>
+  const { compile, createApp } = Vue
+  const template = `
+    <div class="box">
+      <p class="p1">hello world1</p>
+      <p class="p2">hello world2</p>
+    </div>
+  `
+  // compile函数的参数是模板字符串，返回值是渲染函数
+  const renderFn = compile(template)
+  console.log(renderFn);
+  const app = createApp({
+    render: renderFn // render函数的返回值是虚拟节点
+  })
+    .mount('#app')
+</script>
+
+</html>
